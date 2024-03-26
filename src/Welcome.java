@@ -131,7 +131,7 @@ public class Welcome {
 }
      public static void menuCartExit() {
     	 System.out.println("8. 종료");
-}
+} 
      
   
 	} // Welcome 클래스 끝
