@@ -3,6 +3,9 @@ import java.util.Scanner;
 public class Welcome {
     static final int NUM_BOOK = 3;
     static final int NUM_ITEM = 7;
+    static CartItem[] mCartItem = new CartItem[NUM_BOOK];
+    static int mCartCount = 0;
+    
   public static void main(String[] args) {
 	  Scanner input = new Scanner(System.in);
 	  String[][] mBook = new String[NUM_BOOK][NUM_ITEM];
@@ -117,6 +120,15 @@ public class Welcome {
       */
      public static void menuCartItemList() {
     	 System.out.println("2. 장바구니 상품 목록 보기: ");
+    	 System.out.println("-------------------------------");
+    	 System.out.println("    도서ID \t|   수량\t|    합계");
+    	 for (int i = 0; i < mCartCount; i++) {
+    		 System.out.print("   " + mCartItem[i].getBookID() + "\t| ");
+    		 System.out.print("   " + mCartItem[i].getQuantity() + " \t| ");
+    		 System.out.print("   " + mCartItem[i].getTotalPrice());
+    		 System.out.print("   ");  		
+    	 }
+    	 System.out.println("-------------------------------");
      }
      public static void menuCartClear() {
     	 System.out.println("3. 장바구니 비우기: ");
@@ -177,7 +189,6 @@ public class Welcome {
     	 
     	 while (!quit) {
     		 System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
-    		 
     		 Scanner input = new Scanner(System.in);
     		 String str = input.nextLine();
     		 
@@ -199,6 +210,9 @@ public class Welcome {
     		 
     		 if (str.toUpperCase().equals("Y")) {
     			 System.out.println(book[numId][0] + " 도서가 장바구니에 추가되었습니다.");
+    			 //장바구니에 넣기
+    			 if (!isCartInBook(book[numId][0]))
+    				 mCartItem[mCrtCount++] = new CartItem(book[numId]);
     		 }
     		 quit = true;
     	 } else
