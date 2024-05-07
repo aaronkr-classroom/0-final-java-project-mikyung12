@@ -1,5 +1,12 @@
 package com.market.cart;
 
-public class CartInterface {
+import com.market.bookitem.Book;
+
+public interface CartInterface {
+	void printBookList(Book[] p);
+	boolean isCartInBook(String id);
+	void insertBook(Book p);
+	void removeCart(int numId);
+	void deleteBook();
 
 }

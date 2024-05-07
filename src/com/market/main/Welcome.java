@@ -38,13 +38,14 @@ public class Welcome {
             System.out.println("\t" + tagline);
 
             menuIntroduction();
+            try {
             System.out.print("메뉴 번호를 선택해주세요 ");
             int n = input.nextInt();
 
-            if (n < 1 || n > 8) {
+            if (n < 1 || n > 9) {
                 System.out.println("1부터 9까지의 숫자를 입력하세요.");
-            } else {
-
+            } 
+            else {
                 switch (n) {
                     case 1:
                         menuGuestInfo(userName, userMobile);
@@ -78,6 +79,14 @@ public class Welcome {
                 }
             }
         }
+             catch(CartException e) {
+            	System.out.println(e.getMessage());
+            	quit = true;
+             } catch(Exception e) {
+            	System.out.println("올바르지 않은 메뉴 선택으로 종료합니다.");
+            	quit = true;
+            }
+        }
     }
 
     public static void menuIntroduction() {
@@ -102,9 +111,10 @@ public class Welcome {
         }
     }
 
-    public static void menuCartClear() {
+    public static void menuCartClear() throws CartException {
         if (mCart.mCartCount == 0)
-            System.out.println("장바구니에 항목이 없습니다");
+        	throw new CartException("장바구니에 항목이 없습니다");
+          //  System.out.println("장바구니에 항목이 없습니다");
         else {
             System.out.println("장바구니의 모든 항목을 삭제하겠습니까? Y | N");
             Scanner input = new Scanner(System.in);
@@ -160,9 +170,10 @@ public class Welcome {
         System.out.println("5. 장바구니에 항목 수량 줄이기");
     }
 
-    public static void menuCartRemoveItem() {
+    public static void menuCartRemoveItem() throws CartException {
         if (mCart.mCartCount == 0)
-            System.out.println("장바구니에 항목이 없습니다");
+        	throw new CartException("장바구니에 항목이 없습니다");
+           // System.out.println("장바구니에 항목이 없습니다");
         else {
             menuCartItemList();
             boolean quit = false;
@@ -196,9 +207,10 @@ public class Welcome {
         }
     }
 
-    public static void menuCartBill() {
+    public static void menuCartBill() throws CartException {
         if (mCart.mCartCount == 0)
-            System.out.println("장바구니에 항목이 없습니다");
+        	throw new CartException("장바구니에 항목이 없습니다");
+           // System.out.println("장바구니에 항목이 없습니다");
         else {
             System.out.println("배송받을 분은 고객 정보와 같습니까? Y | N ");
             Scanner input = new Scanner(System.in);
@@ -287,3 +299,4 @@ public class Welcome {
         System.out.println();
     }
 }
+
