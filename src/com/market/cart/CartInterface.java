@@ -10,4 +10,3 @@ public interface CartInterface {
 	void deleteBook();
 
 }
-

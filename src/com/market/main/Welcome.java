@@ -5,8 +5,6 @@ import com.market.bookitem.Book;
 import com.market.cart.Cart;
 import com.market.member.Admin;
 import com.market.member.User;
-import com.market.member.Person;
-import com.market.exception.CartException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -78,21 +76,19 @@ public class Welcome {
                     case 9:
                         menuAdminLogin();
                         break;
-                } 
+                }
             }
-    }
-            catch(CartException e) {
+        }
+             catch(CartException e) {
             	System.out.println(e.getMessage());
             	quit = true;
-            }
-            catch(Exception e) {
+             } catch(Exception e) {
             	System.out.println("올바르지 않은 메뉴 선택으로 종료합니다.");
             	quit = true;
             }
         }
     }
-    
-    
+
     public static void menuIntroduction() {
         System.out.println("***********************************************");
         System.out.println(" 1. 고객 정보 확인하기 \t4. 바구니에 상품 추가하기");
@@ -113,13 +109,12 @@ public class Welcome {
         if (mCart.mCartCount >= 0) {
             mCart.printCart();
         }
-        
     }
 
     public static void menuCartClear() throws CartException {
         if (mCart.mCartCount == 0)
-        //    System.out.println("장바구니에 항목이 없습니다");
-        	throw new CartException("장바구니에 항목이 없습니다.");
+        	throw new CartException("장바구니에 항목이 없습니다");
+          //  System.out.println("장바구니에 항목이 없습니다");
         else {
             System.out.println("장바구니의 모든 항목을 삭제하겠습니까? Y | N");
             Scanner input = new Scanner(System.in);
@@ -144,7 +139,6 @@ public class Welcome {
             System.out.print("장바구니에 추가할 도서의 ID를 입력하세요 : ");
 
             String str = input.nextLine();
-            
 
             boolean flag = false;
             int numId = -1;
@@ -177,10 +171,9 @@ public class Welcome {
     }
 
     public static void menuCartRemoveItem() throws CartException {
-    	// System.out.println("6. 장바구니의 항목 삭제하기");
         if (mCart.mCartCount == 0)
         	throw new CartException("장바구니에 항목이 없습니다");
-          //  System.out.println("장바구니에 항목이 없습니다");
+           // System.out.println("장바구니에 항목이 없습니다");
         else {
             menuCartItemList();
             boolean quit = false;
@@ -215,7 +208,6 @@ public class Welcome {
     }
 
     public static void menuCartBill() throws CartException {
-    	// System.out.println("7. 영수증 표시하기");
         if (mCart.mCartCount == 0)
         	throw new CartException("장바구니에 항목이 없습니다");
            // System.out.println("장바구니에 항목이 없습니다");
@@ -300,10 +292,11 @@ public class Welcome {
 
         int sum = 0;
         for (int i = 0; i < mCart.mCartCount; i++)
-        	sum += mCart.mCartItem[i].getTotalPrice();
+            sum += mCart.mCartItem[i].getTotalPrice();
 
         System.out.println("\t\t\t주문 총금액 : " + sum + "원\n");
         System.out.println("---------------------------------------------");
         System.out.println();
     }
 }
+

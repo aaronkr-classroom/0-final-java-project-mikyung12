@@ -1,7 +1,6 @@
 package com.market.member;
 
 public class Admin extends Person {
-	
 	private String id = "Admin";
 	private String password = "Admin1234";
 	
@@ -9,7 +8,7 @@ public class Admin extends Person {
 		super(name, phone);
 	}
 	
-	public String getId() {
+	public String detId() {
 		return id;
 	}
 	
@@ -17,4 +16,4 @@ public class Admin extends Person {
 		return password;
 	}
 
-	}
+}

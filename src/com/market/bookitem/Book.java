@@ -5,11 +5,11 @@ public class Book extends Item {
 	private String description;
 	private String category;
 	private String releaseDate;
-	
+
 	public Book(String bookId, String name, int unitPrice) {
 		super(bookId, name, unitPrice);
 	}
-	
+
 	public Book(String bookId, String name, int unitPrice, String author, String description, String category,
 			String releaseDate) {
 		super(bookId, name, unitPrice);
@@ -18,7 +18,7 @@ public class Book extends Item {
 		this.category = category;
 		this.releaseDate = releaseDate;
 	}
-	
+
 	 public String getBookId() { return bookId; }
 	 public void setBookId(String bookId) { this.bookId = bookId; }
 	 public String getName() { return name; }
@@ -33,6 +33,6 @@ public class Book extends Item {
 	 public void setCategory(String category) { this.category = category; }
 	 public String getReleaseDate() { return releaseDate; }
 	 public void setReleaseDate(String releaseDate) { this.releaseDate = releaseDate; }
-	 
+
 
 }
