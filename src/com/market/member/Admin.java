@@ -8,7 +8,7 @@ public class Admin extends Person {
 		super(name, phone);
 	}
 	
-	public String detId() {
+	public String getId() {
 		return id;
 	}
 	
