@@ -54,7 +54,7 @@ public class BookInIt {
 				
 			Book bookitem = new Book(readBook[0], readBook[1], Integer.parseInt 
 			 (readBook[2]), readBook[3], readBook[4], readBook[5], readBook[6]);
-			 booklist.add(bookitem);			
+			bookList.add(bookitem);
 			}
 			reader.close();
 			fr.close();
