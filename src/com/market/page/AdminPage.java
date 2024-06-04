@@ -55,6 +55,28 @@ public class AdminPage extends JPanel {
 		pricePanel.add(priceTextField);
 		add(pricePanel);
 		
+		JPanel authorPanel = new JPanel();
+		authorPanel.setBounds(100, 150, 700, 50);
+		JLabel authorLabel = new JLabel("저   자 : ");
+		authorLabel.setFont(ft);
+		JTextField authorTextField = new JTextField(20);
+		authorTextField.setFont(ft);
+		authorPanel.add(authorLabel);
+		authorPanel.add(authorTextField);
+		add(authorPanel);
+		
+		JPanel descPanel = new JPanel();
+		descPanel.setBounds(100, 200, 700, 50);
+		JLabel descLabel = new JLabel("설   명 : ");
+		descLabel.setFont(ft);
+		JTextField descTextField = new JTextField(20);
+		descTextField.setFont(ft);
+		descPanel.add(descLabel);
+		descPanel.add(descTextField);
+		add(descPanel);
+		
+		JPanel descPanel = new JPanel();
+		
 		
 		
 	}
