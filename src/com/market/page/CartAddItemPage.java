@@ -1,4 +1,4 @@
-package com.market.cart;
+package com.market.page;
 
 import javax.swing.*;
 import com.market.bookitem.Book;
