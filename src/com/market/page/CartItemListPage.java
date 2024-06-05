@@ -15,22 +15,19 @@ public class CartItemListPage extends JPanel {
 	public static int mSelectRow = -1;
 	
 	public CartItemListPage(JPanel panel, Cart cart) {
-		Font ft;
-		ft = new Font("함초롬돋움", Font.BOLD, 15);
+		Font ft = new Font("함초롬돋움", Font.BOLD, 15);
 		this.mCart = cart;
 		this.setLayout(null);
 		
 		Rectangle rect = panel.getBounds();
-		System.out.println(rect);
 		this.setPreferredSize(rect.getSize());
 		
 		JPanel bookPanel = new JPanel();
 		bookPanel.setBounds(0, 0, 1000, 400);
 		add(bookPanel);
 		
-		ArrayList<CartItem> cartItem = mCart.getmCartItem();
-		Object[][] content = new Object[cartItem.size()]
-		   [tableHeader.length];
+		ArrayList<CartItem> cartItem = mCart.getCartItems();  
+		Object[][] content = new Object[cartItem.size()][tableHeader.length];
 		Integer totalPrice = 0;
 		for (int i = 0; i < cartItem.size(); i++) {
 			CartItem item = cartItem.get(i);
@@ -40,8 +37,7 @@ public class CartItemListPage extends JPanel {
 			content[i][2] = item.getItemBook().getUnitPrice();
 			content[i][3] = item.getQuantity();
 			content[i][4] = item.getTotalPrice();
-			totalPrice += item.getQuantity() *
-					item.getItemBook().getUnitPrice();
+			totalPrice += item.getQuantity() * item.getItemBook().getUnitPrice();
 		}
 		
 		cartTable = new JTable(content, tableHeader);
@@ -52,9 +48,7 @@ public class CartItemListPage extends JPanel {
 		
 		JPanel totalPricePanel = new JPanel();
 		totalPricePanel.setBounds(0, 400, 1000, 50);
-		// totalPricePanel.setBackground(Color.RED);
-		JLabel totalPricelabel = new JLabel("총금액: " +
-		   totalPrice + " 원");
+		JLabel totalPricelabel = new JLabel("총금액: " + totalPrice + " 원");
 		totalPricelabel.setForeground(Color.red);
 		totalPricelabel.setFont(ft);
 		totalPricePanel.add(totalPricelabel);
@@ -65,22 +59,16 @@ public class CartItemListPage extends JPanel {
 		buttonPanel.setBounds(0, 450, 1000, 50);
 		add(buttonPanel);
 		
-		JLabel buttonLabel = new JLabel("장바구니 비우기");
-		buttonLabel.setFont(ft);
-		JButton clearButton = new JButton();
-		clearButton.add(buttonLabel);
+		JButton clearButton = new JButton("장바구니 비우기");
+		clearButton.setFont(ft);
 		buttonPanel.add(clearButton);
 		
-		JLabel removeLabel = new JLabel("장바구니의 항목 삭제하기");
-		removeLabel.setFont(ft);
-		JButton removeButton = new JButton();
-		removeButton.add(removeLabel);
+		JButton removeButton = new JButton("장바구니의 항목 삭제하기");
+		removeButton.setFont(ft);
 		buttonPanel.add(removeButton);
 		
-		JLabel refreshLabel = new JLabel("장바구니 새로 고침");
-		refreshLabel.setFont(ft);
-		JButton refreshButton = new JButton();
-		refreshButton.add(refreshLabel);
+		JButton refreshButton = new JButton("장바구니 새로 고침");
+		refreshButton.setFont(ft);
 		buttonPanel.add(refreshButton);
 	}
 	
@@ -96,10 +84,8 @@ public class CartItemListPage extends JPanel {
 		mPagePanel.setBounds(0, 150, 1000, 750);
 		
 		frame.add(mPagePanel);
-		mPagePanel.add("장바구니 상품 목록 보기",
-				new CartItemListPage(mPagePanel, mCart));
+		mPagePanel.add(new CartItemListPage(mPagePanel, mCart));
 		frame.setVisible(true);
-
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-
 }

@@ -5,12 +5,16 @@ import com.market.bookitem.Book;
 
 public class Cart implements CartInterface {
 	public ArrayList<CartItem> mCartItem = new ArrayList<CartItem>();
+    private ArrayList<CartItem> cartItems;
+
 
 //  static final int NUM_BOOK = 3;
 //	public CartItem[] mCartItem = new CartItem[NUM_BOOK];
 	public static int mCartCount = 0;
 
 	public Cart() {
+		 cartItems = new ArrayList<>();
+		
 
 	}
 
@@ -77,5 +81,9 @@ public class Cart implements CartInterface {
 		mCartItem.remove(numId);
 		mCartCount = mCartItem.size();
 	}
+	
+	 public ArrayList<CartItem> getCartItems() {
+	        return cartItems;
+	    }
 
 }

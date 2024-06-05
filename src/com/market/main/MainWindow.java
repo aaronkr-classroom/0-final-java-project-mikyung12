@@ -2,9 +2,17 @@ package com.market.main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import com.market.page.GuestInfoPage;
+import com.market.cart.Cart;
+import com.market.bookitem.BookInIt;
+import com.market.page.CartAddItemPage;
 
 public class MainWindow extends JFrame {
-	
+	static Cart mCart;
 	static JPanel mMenuPanel, mPagePanel;
 	
 	public MainWindow(String title, int x, int y, int width, int height) {
@@ -34,9 +42,18 @@ public class MainWindow extends JFrame {
 		mPagePanel = new JPanel();
 		mPagePanel.setBounds(0, 150, width, height);;
 		add(mPagePanel);		
+		
+		this.addWindowListener(new WindowAdapter () {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				setVisible(false);  // 현재 프레임 감추기
+				new GuestWindow("고객 정보 입력", 0, 0, 1000, 750);
+			}
+		});
 	}
 	
 	private void menuIntroduction() {
+		mCart = new Cart();
 		Font ft;
 		ft = new Font("함초롬돋움", Font.BOLD, 15);
 		
@@ -45,6 +62,16 @@ public class MainWindow extends JFrame {
 		bt1.setBounds(0, 0, 100, 50);
 		bt1.setFont(ft);
 		mMenuPanel.add(bt1);
+		
+		bt1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mPagePanel.removeAll();  // 패널(mPagePanel)에 표시된 구성 요소 모두 삭제
+				mPagePanel.add("고객 정보 확인", new GuestInfoPage(mPagePanel));
+				// 패널(mPagePanel)에 GuestInfoPage의 내용 출력
+				mPagePanel.revalidate();   // 구성 요소의 가로세로 속성을 변경하여 호출
+				mPagePanel.repaint();      // 구성 요소의 모양을 변경하여 호출
+			}
+		});
 		
 		JButton bt2 = new JButton("장바구니 상품 목록 보기",
 			new ImageIcon("./omages/2.png"));
@@ -62,6 +89,16 @@ public class MainWindow extends JFrame {
 		    new ImageIcon("./images/4.png"));
 		bt4.setFont(ft);
 		mMenuPanel.add(bt4);
+		bt4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				mPagePanel.removeAll();
+				BookInIt.init();
+				mPagePanel.add("장바구니에 항목 추가하기", new CartAddItemPage(mPagePanel, mCart));
+				mPagePanel.revalidate();
+				mPagePanel.repaint();
+			}
+		});
 		
 		JButton bt5 = new JButton("장바구니에 항목 수량 줄이기", 
 			new ImageIcon("./images/5.png"));
@@ -89,9 +126,6 @@ public class MainWindow extends JFrame {
 	    mMenuPanel.add(bt9);			
 	}
 	
-	public static void main (String[] args) {
-		new MainWindow("도서 쇼핑몰", 0, 0, 1000, 750);
-		
-	}
+
 
 }

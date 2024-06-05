@@ -27,6 +27,7 @@ public class Welcome {
     	// Book[] mBookList;
     	ArrayList<Book> mBookList;
     	int mTotalBook = 0;
+    	new GuestWindow("고객 정보 입력", 0, 0, 1000, 750);
 
         Scanner input = new Scanner(System.in);
         System.out.print("당신의 이름을 입력하세요 : ");
