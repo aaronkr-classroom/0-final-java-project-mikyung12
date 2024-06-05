@@ -10,6 +10,7 @@ import com.market.page.GuestInfoPage;
 import com.market.cart.Cart;
 import com.market.bookitem.BookInIt;
 import com.market.page.CartAddItemPage;
+import com.market.page.CartItemListPage;
 
 public class MainWindow extends JFrame {
 	static Cart mCart;
@@ -78,6 +79,21 @@ public class MainWindow extends JFrame {
 		bt2.setBounds(0, 0, 100, 30);
 		bt2.setFont(ft);
 		mMenuPanel.add(bt2);
+		
+		bt2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if (mCart.mCartCount == 0)
+					JOptionPane.showMessageDialog(bt2, "장바구니에 항목이 없습니다", "장바구니 상품 목록 보기", JOptionPane.ERROR_MESSAGE);
+				else {
+					mPagePanel.removeAll();
+					mPagePanel.add("장바구니 상품 목록 보기", new CartItemListPage(mPagePanel, 
+						mCart));
+					mPagePanel.revalidate();
+					mPagePanel.repaint();
+				}
+			}
+		});
 		
 		JButton bt3 = new JButton("장바구니 비우기", 
 			new ImageIcon("./images/3.png"));
