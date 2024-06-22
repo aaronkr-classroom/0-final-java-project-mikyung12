@@ -1,9 +1,9 @@
 package com.market.page;
 
 import javax.swing.*;
-
 import com.market.bookitem.BookInIt;
 import com.market.cart.Cart;
+import com.market.member.UserInIt;
 import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,9 +28,13 @@ public class CartOrderBillPage extends JPanel {
 		this.mCart = cart;
 		
 		shippingPanel = new JPanel();
-		shippingPanel.setBounds(200, 50, 700, 500);
+	//	shippingPanel.setBounds(200, 50, 700, 500);
+		shippingPanel.setBounds(0, 0, 700, 500);
 		shippingPanel.setLayout(null);
-		add(shippingPanel);
+	//	add(shippingPanel);
+		panel.add(shippingPanel);
+		
+		printBillInfo(UserInIt.getmUser().getName(), String.valueOf(UserInIt.getmUser().getPhone()), UserInIt.getmUser().getAddress());
 		
 		printBillInfo("입력된 고객 이름", "입력된 고객 연락처", "입력된 고객 배송지");
 		
@@ -122,9 +126,5 @@ public class CartOrderBillPage extends JPanel {
 		
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

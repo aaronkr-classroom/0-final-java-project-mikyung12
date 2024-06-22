@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class CartItemListPage extends JPanel {
 
@@ -40,13 +43,12 @@ public class CartItemListPage extends JPanel {
             content[i][2] = item.getItemBook().getUnitPrice();
             content[i][3] = item.getQuantity();
             content[i][4] = item.getTotalPrice();
-            totalPrice += item.getQuantity() * item.getItemBook().getUnitPrice();
+            totalPrice += item.getTotalPrice();
         }
 
         cartTable = new JTable(content, tableHeader);
-        JScrollPane jScrollPane = new JScrollPane();
+        JScrollPane jScrollPane = new JScrollPane(cartTable);
         jScrollPane.setPreferredSize(new Dimension(600, 350));
-        jScrollPane.setViewportView(cartTable);
         bookPanel.add(jScrollPane);
 
         JPanel totalPricePanel = new JPanel();
@@ -65,24 +67,22 @@ public class CartItemListPage extends JPanel {
         JButton clearButton = new JButton("장바구니 비우기");
         clearButton.setFont(ft);
         buttonPanel.add(clearButton);
-        
+
         clearButton.addActionListener(new AbstractAction() {
-        	public void actionPerformed(ActionEvent e) {
-        		 ArrayList<CartItem> cartItem = cart.getCartItems();
-        		if (cart.mCartCount == 0)
-        			JOptionPane.showConfirmDialog(clearButton, "장바구니에 항목이 없습니다");
-        		else {
-        			int select = JOptionPane.showConfirmDialog(clearButton,  "장바구니의 모든 항목을 삭제하겠습니까? ");
-        			if (select == 0) {
-        				TableModel tableModel = new DefaultTableModel(new Object[0][0], 
-        						tableHeader);
-        				cartTable.setModel(tableModel);
-        				totalPricelabel.setText("총금액: " + 0 + " 원");
-        				JOptionPane.showMessageDialog(clearButton, "장바구니의 모든 항목을 삭제했습니다");
-        				cart.deleteBook();
-        			}
-        		}
-        	}
+            public void actionPerformed(ActionEvent e) {
+                if (cart.mCartCount == 0) {
+                    JOptionPane.showMessageDialog(clearButton, "장바구니에 항목이 없습니다");
+                } else {
+                    int select = JOptionPane.showConfirmDialog(clearButton, "장바구니의 모든 항목을 삭제하겠습니까?");
+                    if (select == JOptionPane.YES_OPTION) {
+                        TableModel tableModel = new DefaultTableModel(new Object[0][0], tableHeader);
+                        cartTable.setModel(tableModel);
+                        totalPricelabel.setText("총금액: 0 원");
+                        JOptionPane.showMessageDialog(clearButton, "장바구니의 모든 항목을 삭제했습니다");
+                        cart.deleteBook();
+                    }
+                }
+            }
         });
 
         JButton removeButton = new JButton("장바구니의 항목 삭제하기");
@@ -105,11 +105,20 @@ public class CartItemListPage extends JPanel {
                     content[i][2] = item.getItemBook().getUnitPrice();
                     content[i][3] = item.getQuantity();
                     content[i][4] = item.getTotalPrice();
-                    totalPrice += item.getQuantity() * item.getItemBook().getUnitPrice();
+                    totalPrice += item.getTotalPrice();
                 }
                 TableModel tableModel = new DefaultTableModel(content, tableHeader);
                 totalPricelabel.setText("총금액: " + totalPrice + " 원");
                 cartTable.setModel(tableModel);
+                mSelectRow = -1;
+            }
+        });
+
+        cartTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = cartTable.getSelectedRow();
+                mSelectRow = row;
             }
         });
     }
